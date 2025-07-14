@@ -106,55 +106,28 @@
 	<div
 		class="w-full text-3xl text-gray-800 dark:text-gray-100 text-center flex items-center gap-4 font-primary"
 	>
-		<div class="w-full flex flex-col justify-center items-center">
+		<div class="w-full flex flex-col justify-center items-left">
 			<div class="flex flex-row justify-center gap-3 @sm:gap-3.5 w-fit px-5 max-w-xl">
-				<div class="flex shrink-0 justify-center">
-					<div class="flex -space-x-4 mb-0.5" in:fade={{ duration: 100 }}>
-						{#each models as model, modelIdx}
-							<Tooltip
-								content={(models[modelIdx]?.info?.meta?.tags ?? [])
-									.map((tag) => tag.name.toUpperCase())
-									.join(', ')}
-								placement="top"
-							>
-								<button
-									on:click={() => {
-										selectedModelIdx = modelIdx;
-									}}
-								>
-									<img
-										crossorigin="anonymous"
-										src={model?.info?.meta?.profile_image_url ??
-											($i18n.language === 'dg-DG'
-												? `/doge.png`
-												: `${WEBUI_BASE_URL}/static/favicon.png`)}
-										class=" size-9 @sm:size-10 rounded-full border-[1px] border-gray-100 dark:border-none"
-										alt="logo"
-										draggable="false"
-									/>
-								</button>
-							</Tooltip>
-						{/each}
-					</div>
+				<div class="text-3xl @sm:text-3xl line-clamp-1 flex items-center">
+					DSA Assistant
 				</div>
+			</div>
 
+			<div class="flex flex-row justify-center gap-3 @sm:gap-3.5 w-fit px-5 max-w-xl">
 				<div
-					class=" text-3xl @sm:text-3xl line-clamp-1 flex items-center"
+					class="text-3xl @sm:text-3xl line-clamp-1 flex items-center text-gray-500"
 					in:fade={{ duration: 100 }}
 				>
-					{#if models[selectedModelIdx]?.name}
-						<Tooltip
-							content={models[selectedModelIdx]?.name}
-							placement="top"
-							className=" flex items-center "
-						>
-							<span class="line-clamp-1">
-								{models[selectedModelIdx]?.name}
-							</span>
-						</Tooltip>
-					{:else}
-						{$i18n.t('Hello, {{name}}', { name: $user?.name })}
-					{/if}
+				{$i18n.t('How can I help you today?')}
+				</div>
+			</div>
+
+			<div class="flex flex-row justify-center gap-3 @sm:gap-3.5 w-fit px-5 max-w-xl">
+				<div
+					class="text-sm @sm:text-sm text-gray-700 line-clamp-1 flex items-center"
+					in:fade={{ duration: 100 }}
+				>
+				DSA Assistant (Open WebUI) v0.6.10
 				</div>
 			</div>
 
@@ -214,7 +187,7 @@
 					{transparentBackground}
 					{stopResponse}
 					{createMessagePair}
-					placeholder={$i18n.t('How can I help you today?')}
+					placeholder={$i18n.t('Send a Message')}
 					onChange={(input) => {
 						if (!$temporaryChatEnabled) {
 							if (input.prompt !== null) {
